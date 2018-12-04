@@ -1,0 +1,106 @@
+$white: #ffffff;
+$light-gray: #adb5bd;
+$dark-gray: #495057;
+$dark: #282c34;
+$green: #20c997;
+$red: #bb4444;
+$blue: #339af0;
+$rounded: 5px;
+body {
+    text-align: center;
+    background-color: $dark;
+    width: 100%;
+    min-height: 100%;
+    font-size: calc(10px + 2vmin);
+    color: $white;
+}
+
+.fail {
+    color: $red;
+}
+
+.success {
+    color: $green;
+}
+
+.gray {
+    color: $light-gray;
+}
+
+button {
+    display: inline;
+    margin: 0.5rem;
+    border-radius: $rounded;
+    padding: 1rem;
+    font-size: 20pt;
+    &:focus {
+        border: $blue;
+        color: darken($color: $blue, $amount: 1)
+    }
+    &:hover,
+    &:active {
+        color: $white;
+        background-color: $blue;
+        border-color: $dark-gray;
+    }
+    &:disabled {
+        background: $light-gray;
+        color: $dark-gray;
+    }
+}
+
+.winner {
+    font-size: 65pt;
+}
+
+.init-game,
+.scoreboard,
+.game,
+.result {
+    width: 100%;
+    text-align: center;
+    font-size: calc(10px + 2vmin);
+    color: $white;
+    max-height: 100vh;
+    input {
+        display: block;
+        padding: 0.6rem;
+        border-radius: $rounded;
+        width: 80%;
+        margin: 3rem auto;
+        font-size: calc(7px + 2vmin)
+    }
+}
+
+.player-score {
+    position: relative;
+    display: inline-block;
+    flex-grow: 50;
+    max-width: 300px;
+    padding: 20px;
+    .score {
+        display: block;
+        color: $blue;
+        font-size: 60pt;
+    }
+    .move {
+        display: block;
+        padding-top: 15px;
+        margin: 1rem;
+        color: $blue;
+        height: 200px;
+        width: 200px;
+        background: $light-gray;
+        border-radius: $rounded;
+    }
+}
+
+.player-board {
+    border-top: 4px dotted $blue;
+    position: fixed;
+    width: 100%;
+    bottom: 10px;
+    h4 {
+        margin: 1rem;
+    }
+}
