@@ -1,0 +1,10 @@
+@import '../../scss/vars.scss';
+.player-board {
+    background: $dark-gray;
+    margin: 2rem 0 -10px;
+    border-top: 4px dotted $light-blue;
+    position: relative;
+    width: 100%;
+    bottom: 10px;
+    padding-bottom: 3rem;
+}

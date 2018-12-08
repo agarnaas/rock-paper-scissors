@@ -1,0 +1,15 @@
+.text-input {
+    display: block;
+    width: 80%;
+    margin: 3rem auto;
+    font-size: calc(7px + 2vmin);
+    .form_label {
+        display: block;
+        font-weight: bold;
+    }
+}
+
+input[type='text'] {
+    padding: 0.6rem;
+    border-radius: $rounded-border;
+}

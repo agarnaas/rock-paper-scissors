@@ -1,12 +1,13 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
+import TextInput from '../text-input';
+import Button from '../button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './init-game.scss';
 
 class InitGame extends React.Component {
     static propTypes = {
-        startGame: PropTypes.func,
-        title: PropTypes.string
+        startNewGame: PropTypes.func
     };
 
     state = {
@@ -18,23 +19,26 @@ class InitGame extends React.Component {
         this.setState({ name: value });
     };
 
+    onKeyDown = event => {
+        const { key } = event;
+        if (key === 'Enter') this.props.startNewGame(this.state.name);
+        return;
+    };
+
     render() {
         return (
             <div className="init-game">
-                <h1>{this.props.title}</h1>
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Spiller 1"
+                <TextInput
                     onChange={this.onChange}
+                    onKeyDown={this.onKeyDown}
                 />
-                <button
-                    onClick={() => this.props.startGame(this.state.name)}
+                <Button
+                    onClick={() => this.props.startNewGame(this.state.name)}
                     disabled={this.state.name === ''}
+                    theme="submit"
                 >
                     Start spillet
-                </button>
+                </Button>
             </div>
         );
     }

@@ -1,4 +1,4 @@
 {
-  "componentsPath": "src/components",
-  "mockupPath": "src/games"
+     "componentsPath": "src/components",
+    "staticSitePath": "src"
 }

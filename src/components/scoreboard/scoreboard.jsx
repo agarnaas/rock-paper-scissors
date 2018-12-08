@@ -1,76 +1,67 @@
 import React from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
+import './scoreboard.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Scoreboard = props => (
-    <div className="game">
-        <div className="scoreboard">
-            {props.players.map(player => (
-                <div className="player-score">
-                    <div>
-                        <span className="name">{player.name}</span>
-                        <span className="score">{player.score}</span>
-                    </div>
-                    {props.round < 3 && (
-                        <span className="move">
-                            {player.move ? (
-                                <FontAwesomeIcon
-                                    className="icon"
-                                    icon={`hand-${player.move}`}
-                                    size="7x"
-                                />
-                            ) : (
-                                <FontAwesomeIcon
-                                    className="icon"
-                                    icon="question"
-                                    size="7x"
-                                />
-                            )}
-                        </span>
-                    )}
-                </div>
-            ))}
+    <div className="scoreboard">
+        <div className="player-score">
+            <div>
+                <span className="name">{props.player1.name}</span>
+                <span className="score">{props.player1.score}</span>
+            </div>
+            <span className="move">
+                {props.player1.move && props.player2.move ? (
+                    <FontAwesomeIcon
+                        className="icon"
+                        icon={`hand-${props.player1.move}`}
+                        size="7x"
+                    />
+                ) : (
+                    <FontAwesomeIcon
+                        className="icon"
+                        icon="question"
+                        size="7x"
+                    />
+                )}
+            </span>
         </div>
-        <div className="result">
-            {props.round === 3 && (
-                <div
-                    className={cn('winner', {
-                        [props.players[0].score >
-                        props.players[1].score]: 'fail',
-                        [props.players[0].score <
-                        props.players[1].score]: 'success'
-                    })}
-                >
-                    {props.players[0].score < props.players[1].score ? (
-                        <span className="success">
-                            Du vant! <FontAwesomeIcon icon="smile-beam" />
-                        </span>
-                    ) : (
-                        <span className="fail">
-                            Du tapte <FontAwesomeIcon icon="sad-cry" />
-                        </span>
-                    )}
-                    <div>
-                        <button onClick={props.newGame}>Spill på nytt</button>
-                        <button onClick={props.newPlayer}>Ny spiller</button>
-                    </div>
-                </div>
-            )}
+        <div className="player-score">
+            <div>
+                <span className="name">{props.player2.name}</span>
+                <span className="score">{props.player2.score}</span>
+            </div>
+            <span className="move">
+                {props.player1.move && props.player2.move ? (
+                    <FontAwesomeIcon
+                        className="icon"
+                        icon={`hand-${props.player2.move}`}
+                        size="7x"
+                    />
+                ) : (
+                    <FontAwesomeIcon
+                        className="icon"
+                        icon="question"
+                        size="7x"
+                    />
+                )}
+            </span>
         </div>
     </div>
 );
 
 Scoreboard.propTypes = {
-    players: PropTypes.arrayOf({
+    player1: PropTypes.shape({
         name: PropTypes.string,
         score: PropTypes.number,
         move: PropTypes.string
     }).isRequired,
-    round: PropTypes.number,
-    roundWinner: PropTypes.string,
-    newPlayer: PropTypes.func,
-    newGame: PropTypes.func
+    player2: PropTypes.shape({
+        name: PropTypes.string,
+        score: PropTypes.number,
+        move: PropTypes.string
+    }).isRequired
 };
 export default Scoreboard;

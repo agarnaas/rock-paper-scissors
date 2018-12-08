@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Scoreboard from './components/scoreboard';
-import PlayerBoard from './components/player-board';
+import Game from './components/game';
 import InitGame from './components/init-game';
-import './App.scss';
+import './scss/App.scss';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -13,10 +12,15 @@ import {
     faHandSpock,
     faQuestion,
     faRobot,
+    faSpinner
+} from '@fortawesome/free-solid-svg-icons';
+import {
     faSmileBeam,
     faSadCry,
     faUser
-} from '@fortawesome/free-solid-svg-icons';
+} from '@fortawesome/free-regular-svg-icons';
+import Heading from './components/heading';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 library.add(
     faHandPaper,
     faHandRock,
@@ -27,114 +31,47 @@ library.add(
     faSmileBeam,
     faSadCry,
     faUser,
-    faRobot
+    faRobot,
+    faSpinner
 );
 
-const moves = ['rock', 'paper', 'scissors'];
-
 class App extends Component {
-    state = {
-        players: [
-            {
-                name: 'NPC',
-                score: 0,
-                move: null
-            }
-        ],
-        round: 0,
-        roundWinner: null,
-        title: 'Stein - Saks - Papir'
-    };
+    state = { player1: null, player2: null, playerMode: 'onePlayer' };
 
-    initGame = name => {
-        this.setState(state => ({
-            players: state.players.concat({ name: name, score: 0, move: null })
-        }));
-    };
-    newGame = () => {
-        const player = this.state.players[1];
-        this.setState({
-            round: 0,
-            roundWinner: null,
-            players: [
-                {
-                    name: 'NPC',
-                    score: 0,
-                    move: null
-                },
-                {
-                    name: player.name,
-                    score: 0,
-                    move: null
-                }
-            ]
-        });
-    };
-
-    newPlayer = () =>
-        this.setState({
-            round: 0,
-            roundWinner: null,
-            players: [
-                {
-                    name: 'NPC',
-                    score: 0,
-                    move: null
-                }
-            ]
-        });
-
-    playMove = move => {
-        const computerMove = moves[Math.floor(Math.random() * moves.length)];
-        let roundWinner = this.getRoundWinner(move, computerMove);
-        const computer = this.state.players[0];
-        const user = this.state.players[1];
-        computer.score =
-            computer.name === roundWinner ? computer.score + 1 : computer.score;
-        computer.move = computerMove;
-        user.score = user.name === roundWinner ? user.score + 1 : user.score;
-        user.move = move;
-        this.setState(state => ({
-            round: roundWinner ? state.round + 1 : state.round,
-            players: [computer, user],
-            roundWinner: roundWinner
-        }));
-    };
-
-    getRoundWinner = (player, npc) => {
-        if (
-            (player === 'rock' && npc === 'scissors') ||
-            (player === 'paper' && npc === 'rock') ||
-            (player === 'scissors' && npc === 'paper')
-        )
-            return this.state.players[1].name;
-        if (
-            (npc === 'rock' && player === 'scissors') ||
-            (npc === 'paper' && player === 'rock') ||
-            (npc === 'scissors' && player === 'paper')
-        )
-            return this.state.players[0].name;
-
-        return null;
-    };
+    startNewGame = name => this.setState({ player1: name });
 
     render() {
-        return this.state.players.length > 1 ? (
-            <div className="game">
-                <h1>{this.state.title}</h1>
-                <Scoreboard
-                    {...this.state}
-                    newPlayer={this.newPlayer}
-                    newGame={this.newGame}
-                />
-                <PlayerBoard
-                    moves={moves}
-                    playMove={this.playMove}
-                    disabled={this.state.round === 3}
-                />
+        return (
+            <div className="container">
+                <Heading level={1}>
+                    <FontAwesomeIcon
+                        icon="hand-rock"
+                        size="2x"
+                        className="padded-icon"
+                    />
+                    <FontAwesomeIcon
+                        icon="hand-paper"
+                        size="2x"
+                        className="padded-icon"
+                    />
+                    <FontAwesomeIcon
+                        icon="hand-scissors"
+                        size="2x"
+                        className="padded-icon"
+                    />
+                    {!this.state.player1 && <div>Rock - Paper - Scissors</div>}
+                </Heading>
+                {this.state.player1 ? (
+                    <Game
+                        player1={this.state.player1}
+                        player2={this.state.player2}
+                        computer="Computer"
+                        resetPlayer={this.startNewGame}
+                    />
+                ) : (
+                    <InitGame startNewGame={this.startNewGame} />
+                )}
             </div>
-        ) : (
-            <InitGame startGame={this.initGame} title={this.state.title} />
         );
     }
 }

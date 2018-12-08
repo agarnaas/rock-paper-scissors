@@ -1,0 +1,49 @@
+@import '../../scss/vars.scss';
+button {
+    display: inline;
+    margin: 0.5rem;
+    border-radius: $rounded-border;
+    padding: 10px; // small
+    font-size: 15pt;
+    @media only screen and (min-width: $tablet) {
+        font-size: 20pt;
+        padding: 1rem; //big
+    }
+    &:focus {
+        border: $dark-blue;
+        color: darken($color: $light-blue, $amount: 1)
+    }
+    &:hover,
+    &:active {
+        color: $white;
+        background: $dark-blue;
+        border-color: $dark-gray;
+    }
+    &:disabled {
+        background: $light-gray;
+        color: $dark-gray;
+    }
+    &--submit {
+        background: $dark-blue;
+        color: $white;
+        &:hover {
+            background: $light-blue;
+            color: $dark
+        }
+    }
+    &--primary {
+        background: $light-blue;
+        color: $dark
+    }
+    &--secondary {
+        color: $dark;
+        border: $dark-blue 2px solid;
+    }
+    &--tile {
+        border: $dark 4px solid;
+        padding: 8px;
+        height: 40px;
+        width: 40px;
+        ;
+    }
+}
