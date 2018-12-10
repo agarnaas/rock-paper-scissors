@@ -27,7 +27,7 @@ class Game extends React.Component {
     state = {
         winner: null,
         player2: {
-            name: this.props.player2 || 'Computer',
+            name: this.props.player2 || 'PC',
             score: 0,
             move: null
         },
@@ -49,7 +49,7 @@ class Game extends React.Component {
                 move: null
             },
             player1: {
-                name: this.props.player1,
+                name: this.state.player1.name,
                 score: 0,
                 move: null
             },
@@ -72,44 +72,52 @@ class Game extends React.Component {
     };
 
     playRound = () => {
-        if (this.state.playerMode === 'onePlayer') {
-            this.setPlayer2Move();
-        }
-        const player2wins = this.getRoundWinner();
         this.setState(
-            state => ({
-                player1: {
-                    ...state.player1,
-                    score: player2wins
-                        ? state.player1.score
-                        : state.player1.score + 1
-                },
-                player2: {
-                    ...state.player2,
-                    score: player2wins
-                        ? state.player2.score + 1
-                        : state.player2.score
-                }
-            }),
-            this.setWinner
+            state =>
+                state.playerMode === 'onePlayer'
+                    ? {
+                          player2: {
+                              ...state.player2,
+                              move:
+                                  moves[
+                                      Math.floor(Math.random() * moves.length)
+                                  ].name
+                          }
+                      }
+                    : { ...state },
+            this.getRoundWinner
         );
     };
-
-    setPlayer2Move = () =>
-        this.setState(state => ({
-            player2: {
-                ...state.player2,
-                move: moves[Math.floor(Math.random() * moves.length)].name
-            }
-        }));
 
     getRoundWinner = () => {
         const player1Move = this.state.player1.move;
         const player2Move = this.state.player2.move;
         if (player1Move === player2Move) return null;
-        const move = this.state.moves.filter(m => m.name === player1Move)[0];
-        console.log('checking moves:', move);
-        return move.winsOver.indexOf(player2Move) < 0; // true === player2 wins
+        let player1Wins = false;
+        moves.forEach(move => {
+            if (
+                move.name === player1Move &&
+                move.winsOver.indexOf(player2Move) >= 0
+            )
+                player1Wins = true;
+        });
+        this.setState(
+            state => ({
+                player1: {
+                    ...state.player1,
+                    score: player1Wins
+                        ? state.player1.score + 1
+                        : state.player1.score
+                },
+                player2: {
+                    ...state.player2,
+                    score: player1Wins
+                        ? state.player2.score
+                        : state.player2.score + 1
+                }
+            }),
+            this.setWinner
+        );
     };
 
     setWinner = () => {
@@ -120,7 +128,6 @@ class Game extends React.Component {
                         ? this.state.player1.name
                         : this.state.player2.name
             });
-        return;
     };
 
     render() {
@@ -140,6 +147,7 @@ class Game extends React.Component {
                     <PlayerBoard
                         moves={this.state.moves}
                         playMove={this.setPlayerMove}
+                        resetGame={this.resetGame}
                         newPlayer={this.props.resetPlayer}
                         disabled={this.state.winner !== null}
                     />

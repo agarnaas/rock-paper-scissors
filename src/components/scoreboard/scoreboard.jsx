@@ -1,6 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
+import Heading from '../heading';
 import './scoreboard.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,44 +10,45 @@ const Scoreboard = props => (
     <div className="scoreboard">
         <div className="player-score">
             <div>
-                <span className="name">{props.player1.name}</span>
-                <span className="score">{props.player1.score}</span>
+                <Heading level={2}>{props.player1.name}</Heading>
+                <div className="score">{props.player1.score}</div>
             </div>
-            <span className="move">
-                {props.player1.move && props.player2.move ? (
-                    <FontAwesomeIcon
-                        className="icon"
-                        icon={`hand-${props.player1.move}`}
-                        size="7x"
-                    />
-                ) : (
-                    <FontAwesomeIcon
-                        className="icon"
-                        icon="question"
-                        size="7x"
-                    />
-                )}
+            <span
+                className={cn('move', {
+                    'move-unknown': !props.player1.move
+                })}
+            >
+                <FontAwesomeIcon
+                    className="icon"
+                    icon={
+                        props.player1.move
+                            ? `hand-${props.player1.move}`
+                            : 'question'
+                    }
+                    size="6x"
+                />
             </span>
         </div>
+
         <div className="player-score">
             <div>
-                <span className="name">{props.player2.name}</span>
-                <span className="score">{props.player2.score}</span>
+                <Heading level={2}>{props.player2.name}</Heading>
+                <div className="score">{props.player2.score}</div>
             </div>
-            <span className="move">
-                {props.player1.move && props.player2.move ? (
-                    <FontAwesomeIcon
-                        className="icon"
-                        icon={`hand-${props.player2.move}`}
-                        size="7x"
-                    />
-                ) : (
-                    <FontAwesomeIcon
-                        className="icon"
-                        icon="question"
-                        size="7x"
-                    />
-                )}
+            <span
+                className={cn('move', {
+                    'move-unknown': !props.player2.move
+                })}
+            >
+                <FontAwesomeIcon
+                    className="icon"
+                    icon={
+                        props.player2.move
+                            ? `hand-${props.player2.move}`
+                            : 'question'
+                    }
+                    size="6x"
+                />
             </span>
         </div>
     </div>

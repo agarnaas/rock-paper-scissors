@@ -4,7 +4,6 @@ import cn from 'classnames';
 import './button.scss';
 
 export const themes = {
-    submit: 'submit',
     primary: 'primary',
     secondary: 'secondary',
     tile: 'tile'
@@ -17,7 +16,7 @@ const Button = props => (
         onClick={props.onClick}
         type={props.type}
     >
-        <span className="btn-text">{props.children}</span>
+        <span className="button-text">{props.children}</span>
     </button>
 );
 

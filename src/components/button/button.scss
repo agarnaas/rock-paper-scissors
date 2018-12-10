@@ -1,49 +1,82 @@
 @import '../../scss/vars.scss';
-button {
+.button {
     display: inline;
-    margin: 0.5rem;
+    margin: 8px;
     border-radius: $rounded-border;
-    padding: 10px; // small
-    font-size: 15pt;
-    @media only screen and (min-width: $tablet) {
-        font-size: 20pt;
-        padding: 1rem; //big
-    }
-    &:focus {
-        border: $dark-blue;
-        color: darken($color: $light-blue, $amount: 1)
-    }
-    &:hover,
-    &:active {
-        color: $white;
-        background: $dark-blue;
-        border-color: $dark-gray;
-    }
+    padding: 0.7rem;
+    font-size: calc(15px + 2vmin);
     &:disabled {
         background: $light-gray;
         color: $dark-gray;
+        &:hover {
+            background: $light-gray;
+            color: $dark-gray;
+        }
     }
-    &--submit {
+    &--primary {
         background: $dark-blue;
         color: $white;
+        &:focus {
+            border: $dark-blue;
+            color: darken($color: $light-blue, $amount: 1)
+        }
+        &:hover:not(disabled),
+        &:active {
+            color: $white;
+            background: $dark-blue;
+            border-color: $dark-gray;
+        }
+        &:hover {
+            background: $light-blue;
+            color: $dark
+        }
+        @media only screen and ($desktop) {
+            font-size: calc(15px + 2vmin);
+            padding: 1rem;
+            color: $green;
+        }
+    }
+    &--secondary {
+        color: $dark;
+        border: $dark-blue 2px solid;
+        &:focus {
+            border: $light-blue;
+            color: darken($color: $light-blue, $amount: 1)
+        }
+        &:hover:not(disabled),
+        &:active {
+            color: $white;
+            background: $dark-blue;
+            border-color: $dark-gray;
+        }
         &:hover {
             background: $light-blue;
             color: $dark
         }
     }
-    &--primary {
-        background: $light-blue;
-        color: $dark
-    }
-    &--secondary {
-        color: $dark;
-        border: $dark-blue 2px solid;
-    }
     &--tile {
-        border: $dark 4px solid;
-        padding: 8px;
-        height: 40px;
-        width: 40px;
-        ;
+        background: $dark-blue;
+        border: $light-blue 4px solid;
+        color: $light-blue;
+        padding: 1vmin;
+        width: 25vmin;
+        height: 25vmin;
+        max-width: 120px;
+        max-height: 120px;
+        margin: 0.5rem;
+        @media screen and ($desktop) {
+            height: 130px;
+            width: 130px;
+        }
+        &:focus {
+            border-color: $dark;
+        }
+        &:active,
+        &:hover {
+            border-color: $green;
+            background: $dark-green;
+            color: $green;
+        }
     }
+
 }

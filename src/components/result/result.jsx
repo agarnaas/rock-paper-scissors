@@ -2,15 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../button';
 import Heading from '../heading';
+import './result.scss';
 
 const Result = props => (
     <div className="result">
         <div className={props.className}>
-            <Heading level={3}>Vinneren er: {props.winner}!</Heading>
+            <Heading level={3}>The winner is: {props.winner}!</Heading>
         </div>
         <div>
-            <Button onClick={props.newGame}>Spill på nytt</Button>
-            <Button onClick={() => props.newPlayer(null)}>Ny spiller</Button>
+            <Button onClick={props.newGame}>Play again</Button>
+            <Button onClick={() => props.newPlayer(null)}>New player</Button>
         </div>
     </div>
 );

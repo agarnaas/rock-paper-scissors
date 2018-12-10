@@ -5,31 +5,32 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../button';
 
 import './player-board.scss';
+import Heading from '../heading';
 
 const PlayerBoard = props => (
     <div className="player-board">
-        <h4>
-            <FontAwesomeIcon icon={['far', 'user']} /> Spill et trekk
-        </h4>
+        <Heading level={3}>
+            <FontAwesomeIcon icon={['far', 'user']} /> Choose a weapon
+        </Heading>
         {props.moves.map(move => (
             <Button
                 onClick={() => props.playMove(move.name)}
                 disabled={props.disabled}
                 theme="tile"
             >
-                <FontAwesomeIcon icon={`hand-${move.name}`} size="4x" />
+                <FontAwesomeIcon icon={`hand-${move.name}`} size="3x" />
             </Button>
         ))}
-        <div>
+        <div className="player-board--reset-buttons">
             <Button
                 onClick={props.resetGame}
                 theme="secondary"
                 className="inline"
             >
-                Start på nytt
+                Start over
             </Button>
             <Button onClick={e => props.newPlayer(null)} theme="secondary">
-                Ny spiller
+                New player
             </Button>
         </div>
     </div>

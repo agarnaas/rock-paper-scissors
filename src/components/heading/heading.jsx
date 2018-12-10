@@ -19,6 +19,6 @@ Heading.propTypes = {
         PropTypes.arrayOf(PropTypes.node)
     ]),
     className: PropTypes.string,
-    level: PropTypes.oneOf([1, 2, 3, 4, 5])
+    level: PropTypes.oneOf([1, 2, 3])
 };
 export default Heading;

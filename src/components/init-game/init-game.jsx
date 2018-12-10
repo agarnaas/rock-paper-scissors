@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextInput from '../text-input';
 import Button from '../button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './init-game.scss';
 
 class InitGame extends React.Component {
@@ -31,13 +30,14 @@ class InitGame extends React.Component {
                 <TextInput
                     onChange={this.onChange}
                     onKeyDown={this.onKeyDown}
+                    label="Player name"
                 />
                 <Button
                     onClick={() => this.props.startNewGame(this.state.name)}
                     disabled={this.state.name === ''}
-                    theme="submit"
+                    theme="primary"
                 >
-                    Start spillet
+                    Start game
                 </Button>
             </div>
         );

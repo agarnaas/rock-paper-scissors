@@ -44,28 +44,19 @@ class App extends Component {
         return (
             <div className="container">
                 <Heading level={1}>
-                    <FontAwesomeIcon
-                        icon="hand-rock"
-                        size="2x"
-                        className="padded-icon"
-                    />
-                    <FontAwesomeIcon
-                        icon="hand-paper"
-                        size="2x"
-                        className="padded-icon"
-                    />
-                    <FontAwesomeIcon
-                        icon="hand-scissors"
-                        size="2x"
-                        className="padded-icon"
-                    />
-                    {!this.state.player1 && <div>Rock - Paper - Scissors</div>}
+                    <div>Rock - Paper - Scissors</div>
+                    {!this.state.player1 && (
+                        <span>
+                            <FontAwesomeIcon icon="hand-rock" size="2x" />
+                            <FontAwesomeIcon icon="hand-paper" size="2x" />
+                            <FontAwesomeIcon icon="hand-scissors" size="2x" />
+                        </span>
+                    )}
                 </Heading>
                 {this.state.player1 ? (
                     <Game
                         player1={this.state.player1}
                         player2={this.state.player2}
-                        computer="Computer"
                         resetPlayer={this.startNewGame}
                     />
                 ) : (

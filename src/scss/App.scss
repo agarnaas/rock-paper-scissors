@@ -1,12 +1,22 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed:700");
 @import './vars.scss';
 .container {
     text-align: center;
-    background: $dark;
+    background: $black;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     min-height: 100vh;
-    font-size: calc(10px + 2vmin);
     color: $white;
-    padding-top: 2.5rem;
+    padding: 0;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: calc(8px + 1vmin);
+    @media screen and ($tablet) {
+        font-size: calc(10px + 2vmin);
+    }
+    @media screen and ($desktop) {
+        font-size: calc(10px + 2vmin);
+    }
 }
 
 .fail {
@@ -25,5 +35,3 @@
     padding: 0 1rem;
     margin: 0 1rem;
 }
-
-// media query: small < 560px

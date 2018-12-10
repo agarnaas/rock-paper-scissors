@@ -1,10 +1,28 @@
 @import '../../scss/vars.scss';
 .player-board {
+    position: fixed;
+    bottom: 0;
     background: $dark-gray;
     margin: 2rem 0 -10px;
     border-top: 4px dotted $light-blue;
-    position: relative;
     width: 100%;
-    bottom: 10px;
-    padding-bottom: 3rem;
+    padding: 1.5rem 0.5rem;
+    &--reset-buttons {
+        margin-top: 1rem;
+    }
+    &--reset-buttons {
+        display: block;
+        button {
+            display: inline-block;
+        }
+        @media screen and (min-width: 620px) {
+            display: inline-block;
+            position: relative;
+            bottom: -13px;
+            button {
+                display: block;
+                margin-bottom: 0;
+            }
+        }
+    }
 }

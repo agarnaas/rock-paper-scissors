@@ -1,16 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './text-input.scss';
 
 const TextInput = props => (
     <div className="text-input">
-        <label className="form_label">{props.label}</label>
-        <input
-            type="text"
-            onChange={props.onChange}
-            onKeyDown={props.onKeyDown}
-            placeholder={props.placeholder}
-            required={props.required}
-        />
+        <label className="form_label">
+            {props.label}
+            <input
+                type="text"
+                onChange={props.onChange}
+                onKeyDown={props.onKeyDown}
+                placeholder={props.placeholder}
+                required={props.required}
+            />
+        </label>
     </div>
 );
 

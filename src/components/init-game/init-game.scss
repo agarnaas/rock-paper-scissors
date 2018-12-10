@@ -2,15 +2,6 @@
 .init-game {
     width: 100%;
     text-align: center;
-    font-size: calc(10px + 2vmin);
     color: $white;
     max-height: 100vh;
-    input {
-        display: block;
-        padding: 0.6rem;
-        border-radius: $rounded-border;
-        width: 80%;
-        margin: 3rem auto;
-        font-size: calc(7px + 2vmin)
-    }
 }
